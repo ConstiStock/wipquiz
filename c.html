@@ -23,6 +23,8 @@
     <p id="lead">Du wurdest eingeladen! Alle bekommen dieselben Flaggen – wer am weitesten kommt, gewinnt. Ihr habt 24 Stunden Zeit.</p>
     <div class="code" id="code">––––––</div>
     <a class="button" id="open" href="#">In WIP öffnen</a>
+    <p><button id="copy" class="button" style="background:transparent;color:inherit;border:1.5px solid currentColor">Code kopieren</button></p>
+    <p class="muted" id="hint">Klappt der Knopf nicht? In WhatsApp &amp; Co. oben auf „…“ → „In Safari öffnen“ tippen. Oder: Code kopieren → WIP → Duell → Flaggen-Challenge → Einfügen.</p>
   </section>
 
   <div class="card">
@@ -47,12 +49,22 @@
     document.getElementById("code").textContent = code;
     document.getElementById("open").href = "wipquiz://challenge/" + code;
   }
+  document.getElementById("copy").addEventListener("click", function () {
+    if (!code) return;
+    var b = this;
+    (navigator.clipboard ? navigator.clipboard.writeText(code) : Promise.reject()).then(function () {
+      b.textContent = b.dataset.done || "Kopiert ✓";
+    }).catch(function () { b.textContent = code; });
+  });
   if (!(navigator.language || "de").toLowerCase().startsWith("de")) {
     document.documentElement.lang = "en";
     document.title = "WIP – Flag Challenge";
     document.getElementById("title").textContent = "Flag Challenge";
     document.getElementById("lead").textContent = "You've been invited! Everyone gets the same flags – whoever gets furthest wins. You have 24 hours.";
     document.getElementById("open").textContent = "Open in WIP";
+    document.getElementById("copy").textContent = "Copy code";
+    document.getElementById("copy").dataset.done = "Copied ✓";
+    document.getElementById("hint").textContent = "Button not working? In WhatsApp & co., tap “…” → “Open in Safari”. Or: copy the code → WIP → Duel → Flag Challenge → Paste.";
     document.getElementById("h-noapp").textContent = "Don't have WIP yet?";
     document.getElementById("steps").innerHTML =
       '<li>Install WIP via TestFlight: <a href="https://testflight.apple.com/join/WM5aRKk9">testflight.apple.com/join/WM5aRKk9</a></li>' +
