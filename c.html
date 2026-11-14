@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WIP – Flaggen-Challenge</title>
+<meta name="description" content="Du wurdest zu einer Flaggen-Challenge in WIP eingeladen. / You've been invited to a Flag Challenge in WIP.">
+<meta property="og:title" content="Flaggen-Challenge in WIP">
+<meta property="og:description" content="Gleiche Flaggen für alle – wer am weitesten kommt, gewinnt. 24 Stunden Zeit.">
+<meta property="og:image" content="https://constistock.github.io/wipquiz/logo.png">
+<link rel="stylesheet" href="style.css">
+<style>
+  .code { font-family: "Space Grotesk", sans-serif; font-size: 34px; font-weight: 700; letter-spacing: 6px; margin: 10px 0 18px; }
+  .steps { padding-left: 20px; } .steps li { margin: 6px 0; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header><a href="index.html"><img src="logo.png" alt=""><span class="brand">WIP</span></a></header>
+
+  <section class="hero">
+    <h1 id="title">Flaggen-Challenge</h1>
+    <p id="lead">Du wurdest eingeladen! Alle bekommen dieselben Flaggen – wer am weitesten kommt, gewinnt. Ihr habt 24 Stunden Zeit.</p>
+    <div class="code" id="code">––––––</div>
+    <a class="button" id="open" href="#">In WIP öffnen</a>
+  </section>
+
+  <div class="card">
+    <h3 id="h-noapp" style="margin-top:0">Noch kein WIP?</h3>
+    <ol class="steps" id="steps">
+      <li>WIP über TestFlight installieren: <a href="https://testflight.apple.com/join/WM5aRKk9">testflight.apple.com/join/WM5aRKk9</a></li>
+      <li>Diese Seite nochmal öffnen und auf „In WIP öffnen“ tippen.</li>
+      <li>Oder in WIP: Duell → Flaggen-Challenge → Code eingeben.</li>
+    </ol>
+  </div>
+
+  <nav>
+    <a href="index.html" id="l-support">Support</a>
+    <a href="datenschutz.html" id="l-privacy">Datenschutz</a>
+    <a href="impressum.html" id="l-imprint">Impressum</a>
+  </nav>
+</div>
+<script>
+  // Code aus dem Link (#ABC123) lesen; nur Buchstaben und Ziffern zulassen.
+  var code = (location.hash || "").replace("#", "").toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 6);
+  if (code) {
+    document.getElementById("code").textContent = code;
+    document.getElementById("open").href = "wipquiz://challenge/" + code;
+  }
+  if (!(navigator.language || "de").toLowerCase().startsWith("de")) {
+    document.documentElement.lang = "en";
+    document.title = "WIP – Flag Challenge";
+    document.getElementById("title").textContent = "Flag Challenge";
+    document.getElementById("lead").textContent = "You've been invited! Everyone gets the same flags – whoever gets furthest wins. You have 24 hours.";
+    document.getElementById("open").textContent = "Open in WIP";
+    document.getElementById("h-noapp").textContent = "Don't have WIP yet?";
+    document.getElementById("steps").innerHTML =
+      '<li>Install WIP via TestFlight: <a href="https://testflight.apple.com/join/WM5aRKk9">testflight.apple.com/join/WM5aRKk9</a></li>' +
+      '<li>Open this page again and tap “Open in WIP”.</li>' +
+      '<li>Or in WIP: Duel → Flag Challenge → enter the code.</li>';
+    document.getElementById("l-privacy").href = "en/privacy.html";
+    document.getElementById("l-privacy").textContent = "Privacy";
+    document.getElementById("l-imprint").textContent = "Legal notice";
+    document.getElementById("l-support").href = "en/index.html";
+  }
+</script>
+</body>
+</html>
